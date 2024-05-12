@@ -1,4 +1,5 @@
 import java.util.Arrays;
+
 /* Cheque permutacoes: Dada duas strings- Uma eh a permutacao de outra? Procure fazer as
  * operacoes in place
  * a funcao equals returna true se QUALQUER OBJETO seja igual a um segundo OBJETO que esta sendo
