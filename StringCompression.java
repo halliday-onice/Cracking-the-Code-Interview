@@ -7,36 +7,39 @@ import java.util.Arrays;
 
 public class StringCompression {
       public static String countCharac(String s){
+
+            if(s == null || s.length() == 0)
+                  return "";
+
+            // stringBuilders are more efficient and are mutable, diferently from String 
+            StringBuilder compressedString = new StringBuilder();
+            
             int count = 0;
-            String compressedString = "";
-            for(int i =0; i < s.length() - 1;i++){
+            
+            for(int i = 0; i < s.length(); i++) {
                   count++;
-                  // se o item seguinte for diferente, preciso fazer o append
-                  if(s.charAt(i) != s.charAt(i + 1)){ // essa ultima condicao eh pra nao ter o erro de out of the bounds
-                        compressedString += s.charAt(i);
-                        //System.out.println("sArray[i]: \n" + sArray[i]);
-                        compressedString += "" + count ; // aqui percebi que so da pra concatenar usando string
-                        //System.out.println(count);
+                  // i + 1 >= s.length() is to avoid the string out of index value
+                  // This tells the code that it's the last character, and there's no need to check for a next character using s.charAt(i + 1).
+                  if(i + 1 >= s.length() || s.charAt(i) != s.charAt(i + 1)){ // if the next character
+                        // is bigger than the length of string OR the actual is different from the next you can count
+                        compressedString.append(s.charAt(i));
+                        compressedString.append(count);
                         count = 0;
                   }
-
+                  
+                  
             }
-            // preciso conferir se antes do utimo caractere, tem um numero
-            if(count > 0){
-                  compressedString +=  s.charAt(s.length() - 1);
-                  compressedString += "" + count;
-            }
-
-
-            
-            return compressedString;
+            //compressedString.append(s.charAt(s.length() - 1));
+            //compressedString.append(count);
+ 
+            return compressedString.toString();
 
             
             
       }
 
       public static void main(String [] args ){
-            String ex = new String("aaaabbbbbbbcccc");
+            String ex = new String("aaaabb");
 
             String out = countCharac(ex);
             System.out.println(out);
